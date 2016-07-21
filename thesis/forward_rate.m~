@@ -1,0 +1,9 @@
+function rates=forward_rate(zeroCurve,dates_start,dates_matures, compounding)
+    tau=dates_start-dates_matures; %in years
+    if strcmp(compounding,s2)
+        rates=(1./tau)*(feval(fitobject,dates_start)./feval(fitobject,dates_start)-1);
+    elseif strcmp(compounding,s2)
+        
+    else
+        display('No such argument exists');
+end

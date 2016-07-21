@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta name="description" content="Project Rhea: learning by teaching! A Purdue University online education project. ">
+    <meta name="keywords" content="learn by teaching, online education, peer education, tutorials, practice problems, table of formulas, slectures, class wiki, course wiki, rhea, project rhea, for students by students, purdue, purdue courses, purdue classes, purdue discussion">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="MediaWiki 1.23.5" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/rhea/opensearch_desc.php" title="Rhea (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="https://www.projectrhea.org/rhea/api.php?action=rsd" />
+<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" />
+<link rel="alternate" type="application/atom+xml" title="Rhea Atom feed" href="/rhea/index.php?title=Special:RecentChanges&amp;feed=atom" />    <title>The principles for how to generate random samples from a Gaussian distribution - Rhea</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="/rhea/skins/rhea/main2.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="/rhea/skins/common/commonPrint.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="/rhea/skins/rhea/rheaprint.css" />
+        <script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution","wgTitle":"The principles for how to generate random samples from a Gaussian distribution","wgCurRevisionId":68944,"wgRevisionId":68944,"wgArticleId":12571,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Slecture","ECE662Spring2014Boutin","ECE","ECE662","Pattern recognition"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"preview":true,"previewDialog":false,"publish":true}});
+}</script>
+            <script src="https://www.projectrhea.org/rhea/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=rhea2&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution","wgTitle":"The principles for how to generate random samples from a Gaussian distribution","wgCurRevisionId":68944,"wgRevisionId":68944,"wgArticleId":12571,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Slecture","ECE662Spring2014Boutin","ECE","ECE662","Pattern recognition"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution","wgIsProbablyEditable":false,"wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"preview":true,"previewDialog":false,"publish":true}});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":6,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"rhea2","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"wikieditor-preview":1,"wikieditor-publish":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: prjrhea:resourceloader:filter:minify-js:7:75a493a070d3c511f2e4731c57d06bb5 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script><style type="text/css">/*<![CDATA[*/
+.source-matlab {line-height: normal;}
+.source-matlab li, .source-matlab pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for matlab
+ * CSS class: source-matlab, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.matlab.source-matlab .de1, .matlab.source-matlab .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;font-family: monospace, monospace;}
+.matlab.source-matlab  {font-family:monospace;}
+.matlab.source-matlab .imp {font-weight: bold; color: red;}
+.matlab.source-matlab li, .matlab.source-matlab .li1 {font-weight: normal; vertical-align:top;}
+.matlab.source-matlab .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.matlab.source-matlab .li2 {font-weight: bold; vertical-align:top;}
+.matlab.source-matlab .kw1 {color: #0000FF;}
+.matlab.source-matlab .kw2 {color: #0000FF;}
+.matlab.source-matlab .co1 {color: #228B22;}
+.matlab.source-matlab .co2 {color:#A020F0;}
+.matlab.source-matlab .br0 {color: #080;}
+.matlab.source-matlab .sy0 {color: #080;}
+.matlab.source-matlab .nu0 {color: #33f;}
+.matlab.source-matlab .re0 {color: #33f;}
+.matlab.source-matlab .ln-xtra, .matlab.source-matlab li.ln-xtra, .matlab.source-matlab div.ln-xtra {background-color: #ffc;}
+.matlab.source-matlab span.xtra { display:block; }
+
+/*]]>*/
+</style><script type="text/javascript" src="/rhea/skins/common/IEFixes.js?303"></script>
+<script type="text/javascript" src="/rhea/skins/common/wikibits.js"></script>
+
+<script>
+function printDiv(divName) {
+            var contents = document.getElementById(divName).innerHTML;
+            var frame1 = document.createElement('iframe');
+            frame1.name = "frame1";
+            frame1.style.position = "absolute";
+            frame1.style.top = "-1000000px";
+            document.body.appendChild(frame1);
+            var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument;
+            frameDoc.document.open();
+            frameDoc.document.write('<html><head><title>DIV Contents</title>');
+            frameDoc.document.write('</head><body>');
+            frameDoc.document.write(contents);
+            frameDoc.document.write('</body></html>');
+            frameDoc.document.close();
+            setTimeout(function () {
+                window.frames["frame1"].focus();
+                window.frames["frame1"].print();
+                document.body.removeChild(frame1);
+            }, 500);
+            return false;
+        }
+
+</script>
+
+    <!--[if lt IE 7]>
+    <style media="screen" type="text/css">
+        .col1 {
+            width:100%;
+        }
+    </style>
+    <![endif]-->
+  </head>
+  <body         >
+
+<div id="header">
+    <a href="/" style="background: 0">
+        <img src='/rhea/skins/rhea/rhea_logo_July2013.png'/>
+    </a>
+    <h1>The principles for how to generate random samples from a Gaussian distribution - Rhea</h1>
+    <ul id="nav-top" class="noprint">
+
+ 
+        <div class='portlet' id='p-navigation'>
+            
+
+
+
+
+
+	<li id='p-personal-actions'><a href="#">User</a><ul>
+			<li><a href="/rhea/index.php?title=Special:UserLogin&amp;returnto=The+principles+for+how+to+generate+random+samples+from+a+Gaussian+distribution">Log in</a></li>
+		</ul></li>
+	<li id='p-content-actions'><a href="#"> Actions</a><ul>
+					<li><a href="/rhea/index.php?title=The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution&amp;action=edit">View source</a></li>
+							<li><a href="/rhea/index.php?title=The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution&amp;action=history">History</a></li>
+								<li><a href="/rhea/index.php?title=Special:RecentChanges">Recent Changes</a></li>
+	
+				</ul></li>			
+			<li id="n-slectures"><a href="/learning/slectures.php">Slectures</a></li> 
+			
+
+				
+			<li id="n-squad"><a href="/rhea/index.php/Math_squad">Squad</a></li> 
+			
+
+				
+			<li id="n-practice"><a href="https://www.projectrhea.org/learning/practice.php">Practice</a></li> 
+			
+
+				
+			<li id="n-formulas"><a href="/rhea/index.php/Collective_Table_of_Formulas">Formulas</a></li> 
+			
+
+				
+			<li id="n-donations"><a href="/learning/donate.php">Donations</a></li> 
+			
+
+				
+			<li id="n-general-disclaimer"><a href="/learning/disclaimer.php">Disclaimer</a></li> 
+			
+
+				
+			<li id="n-home"><a href="/">Home</a></li> 
+			 </div> 
+
+	
+        <div class='portlet' id='p-SEARCH'>
+             </div> 
+
+	
+        <div class='portlet' id='p-TOOLBOX'>
+             </div> 
+
+	
+        <div class='portlet' id='p-LANGUAGES'>
+             </div> 
+
+		<li class="cheat"></li>
+</ul>
+</div>
+
+<div class="colmask leftmenu">
+    <div class="colright">
+        <div class="col1wrap">
+            <div class="col1">
+                <!-- Center Content-->
+            <div id="content-body">
+                <a name="top" id="contentTop"></a>
+		                    <!-- <h2 class="articleTitle">The principles for how to generate random samples from a Gaussian distribution</h2> -->
+<div class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style" style="bottom:20px; left:10px;">
+    <a class="a2a_dd" href="http://www.addtoany.com/share_save"></a>
+    <a class="a2a_button_google_gmail"></a>
+    <a class="a2a_button_linkedin"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+</div>
+
+<div> <a class="print-btn" href="javascript:printDiv('mw-content-text');">Print</a></div>
+            <div id="articleContent">
+                <div id="contentSub"></div>
+                                                    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p><br />
+</p>
+<center><font size="4">
+<p>The principle of how to generate a Gaussian random variable
+</font>
+</p><p>A <a rel="nofollow" class="external text" href="http://www.projectrhea.org/learning/slectures.php">slecture</a> by ECE student Joonsoo Kim
+</p><p>Partly based on the <a href="/rhea/index.php/2014_Spring_ECE_662_Boutin_Statistical_Pattern_recognition_slectures" title="2014 Spring ECE 662 Boutin Statistical Pattern recognition slectures">ECE662 Spring 2014 lecture</a> material of <a href="/rhea/index.php/User:Mboutin" title="User:Mboutin">Prof. Mireille Boutin</a>. 
+</p>
+</center>
+<hr />
+<hr />
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#1..09Introduction"><span class="tocnumber">1</span> <span class="toctext"><b>1.	Introduction</b></span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#2..09Inverse_transform_sampling"><span class="tocnumber">2</span> <span class="toctext"><b>2.	Inverse transform sampling</b></span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#3._Box_Muller_Transform"><span class="tocnumber">3</span> <span class="toctext">3. Box Muller Transform</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#4._Marsaglia_polar_method"><span class="tocnumber">4</span> <span class="toctext">4. Marsaglia polar method</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#5._Generate_a_Gaussian_random_variable_using_a_normal_distributed_random_variable."><span class="tocnumber">5</span> <span class="toctext">5. Generate a Gaussian random variable using a normal distributed random variable.</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#6._Sample_C_code_for_how_to_generate_a_Gaussian_random_variable_based_on_Marsaglia_polar_method"><span class="tocnumber">6</span> <span class="toctext">6. Sample C code for how to generate a Gaussian random variable based on Marsaglia polar method</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Questions_and_comments"><span class="tocnumber">7</span> <span class="toctext">Questions and comments</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="1..09Introduction"><b>1.	Introduction</b></span></h2>
+<p>In this slecture, we will explain the principle of how to generate Gaussian random samples. Even though there are more general methods to generate random samples which have any distribution, we will focus on the simple method such as Box Muller transform to generate Gaussian random samples in this slecture. To do this, we will introduce inverse transform sampling which is a bas method for pseudo random number sampling first. Then, we will explain Gaussian random sample generation method based on Box Muller transform. Finally, we will introduce Marsaglia polar method which improves Box Muller transform. 
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="2..09Inverse_transform_sampling"><b>2.	Inverse transform sampling</b></span></h2>
+<p>Let U be a random variable which is uniformly distributed on the interval [0, 1]. And let F be a continuous CDF(cumulative distribution function) of a random variable, X which we want to generate. Then, inverse CDF is defined by
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F^{-1}(u)=inf\{ x|F(x)\leq u, \quad u\in [0, 1] \}   $</span></center>
+<p>Using this inverse CDF, we can generate random variable X as following
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   X &lt;- F^{-1}(U)\quad  $</span></center>
+<p>Now, we will apply this to generate a random variable X which has the exponential distribution
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   f(x) = \lambda exp(-\lambda x) \quad where \quad x \geq 0   $</span></center>
+<p>Let's compute CDF of X
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(x) = \int_{-\infty}^x \lambda exp(-\lambda x') dx' = \int_0^x \lambda exp(-\lambda x') dx' = [-exp(-\lambda x')]_0^x = 1-exp(-\lambda x) \leq u   $</span></center>
+<p>Then, we can compute x as
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   x = -\lambda^{-1}ln(1-u) \quad  $</span></center>
+<p>In other words, we can get an exponentially distributed random variable X using an uniformly distributed random variable U
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   X = -\lambda^{-1}ln(1-U) \quad  $</span></center>
+<p>This method can be applied to generate any random variable if the CDF of it is easily calculated. If it is not, we cannot use this method. Instead, we can use other methods such as rejection sampling, importance sampling, Hastings-Metropolis sampling, etc. However, we do not cover those sampling methods here. 
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="3._Box_Muller_Transform">3. Box Muller Transform</span></h2>
+<p>Before explaing Box Muller transform, we will apply Inverse transform sampling to generate a normal distributed random variable. 
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}} exp(-\frac{1}{2} x'^2) dx'   $</span></center>
+<p>This integration is not straightforward to make an algebraic expression in terms of elementary functions such as exponentials and logs. Therefore, we use Box Muller transform method to generate a normal distributed random variable.
+</p><p>Let (X, Y) be a pair of independent normal distributed random variable. Then, we can express F(x,y) as follows
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(x,y) = \int_{-\infty}^y \int_{-\infty}^x \{ \frac{1}{\sqrt{2\pi}} exp(-\frac{1}{2} x'^2) \} \{ \frac{1}{\sqrt{2\pi}} exp(-\frac{1}{2} y'^2)\} dx'dy' = \int_{-\infty}^y \int_{-\infty}^x \frac{1}{2\pi} exp(-\frac{1}{2} (x'^2 + y'^2) ) dx'dy'  $</span></center>
+<p>Now, define random variable R and θ as follows
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   R = \sqrt{X^2 + Y^2}, \quad  \theta = tan(\frac{Y}{X}) \quad where \quad \theta \in [0, 2\pi]  $</span></center>
+<p>X and Y can be expressed using R and θ as follows
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   X = Rcos(\theta) ,\quad Y = Rsin(\theta)  $</span></center>
+<p>Then, we can express F(x,y) using r and θ (dxdy = rdrdθ)
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(x,y) = F(r,\theta) = \int_{-\infty}^\theta \int_{-\infty}^r \frac{1}{2\pi} exp(-\frac{1}{2} r'^2 ) r' dr'd\theta'  = \int_{0}^\theta \int_{0}^r \frac{1}{2\pi} exp(-\frac{1}{2} r'^2 ) r' dr'd\theta' =  \frac{1}{2\pi} \int_{-\infty}^\theta [-exp(-\frac{1}{2} r'^2 )]_0^r d\theta'   $</span></center>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   = \frac{\theta}{2\pi}  \{ 1-exp(-\frac{1}{2} r^2 ) \} = F(r)F(\theta)  $</span></center>
+<p>Let <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ U_1 $</span> and <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ U_2 $</span> be uniformly distributed random variables such that <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  U_1,U_2 \in [0, 1]  $</span> . Then we can say as follows
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(\theta) \leq u_1, \quad F(r) \leq u_2  $</span></center>
+<p>Since <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  U_2 \in [0, 1]  $</span>, we can say <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  1-U_2 \in [0, 1]   $</span>. Then 
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   F(\theta) \leq u_1, \quad F(r) \leq 1-u_2  $</span></center>
+<p>Therefore, we can get <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ u_1 $</span> and <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ u_2 $</span> as follows
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   u_1 = \frac{\theta}{2\pi}, \quad \theta = 2\pi u_1   $</span></center>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   1-u_2 = 1-exp(-\frac{1}{2} r^2 ), \quad u_2 = exp(-\frac{1}{2} r^2), \quad r = \sqrt{-2ln(u_2)}   $</span></center>
+<p>Now, we can generate X and Y using <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ U1 $</span> and <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ U2 $</span>.
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   X = Rcos(\theta) = \sqrt{-2ln(U_2)}cos( 2\pi U_1 ),   $</span></center>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   Y = Rsin(\theta) = \sqrt{-2ln(U_2)}sin( 2\pi U_1 ),   $</span></center>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="4._Marsaglia_polar_method">4. Marsaglia polar method</span></h2>
+<p>To remove cosine and sine functions used in the Box Muller transforms, this Marsaglia which is generally used to generate normal distributed random variable is introduced. To avoid using trigonometric functions of Box Muller transforms, let's consider polar coordinates. For this, we consider random variables, <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ W_1 $</span>, <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ W_2 $</span> which are uniformly distributed on [-1, 1] such that <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ W_1^2+W_2^2 &lt; 1 $</span>   It can be generated as follows.
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   W_1 = 2U_1-1 ,\quad W_2 = 2U_2-1 \quad where \quad 0\leq W_1^2+W_2^2 &lt; 1  $</span></center>
+<p>Then, we can substitute <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ cos( 2\pi U_1 ) $</span> with <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  W_1/\sqrt{W_1^2+W_2^2}  $</span> and  <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ sin( 2\pi U_1 ) $</span> with <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  W_2/\sqrt{W_1^2+W_2^2}  $</span>.
+</p><p>In addition, since <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  W_1^2+W_2^2 $</span> is uniformly distributed on [0, 1), <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  \sqrt{-2ln(U_2)}  $</span> is replaced with <span class="mwe-math-fallback-source-inline tex" dir="ltr">$  \sqrt{-2ln(W_1^2+W_2^2)} $</span>. Therefore, X and Y are generated by
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   X =  \sqrt{-2ln(W_1^2+W_2^2)}   \frac{W_1}{\sqrt{W_1^2+W_2^2}},   $</span></center>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   Y = \sqrt{-2ln(W_1^2+W_2^2)}   \frac{W_2}{\sqrt{W_1^2+W_2^2}},   $</span></center>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="5._Generate_a_Gaussian_random_variable_using_a_normal_distributed_random_variable.">5. Generate a Gaussian random variable using a normal distributed random variable.</span></h2>
+<p>Let G&#160;: Gaussian random variable, <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ \mu $</span>&#160;: mean of G, and <span class="mwe-math-fallback-source-inline tex" dir="ltr">$ \sigma $</span>&#160;: standard deviation of G
+Then, G can be generated by X which is a normal distributed random variable
+</p>
+<center><span class="mwe-math-fallback-source-inline tex" dir="ltr">$   G = X*\sigma + \mu \quad  $</span></center>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="6._Sample_C_code_for_how_to_generate_a_Gaussian_random_variable_based_on_Marsaglia_polar_method">6. Sample C code for how to generate a Gaussian random variable based on Marsaglia polar method</span></h2>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr"><div class="matlab source-matlab"><pre class="de1">/************************************************************************/
+&#160;
+	gaussian -- generate a Gaussian random variable   
+&#160;
+	            with <span class="kw2">mean</span> <span class="co2">'u'</span> and standard deviation <span class="co2">'d'</span>
+&#160;
+/************************************************************************/
+&#160;
+<span class="kw2">double</span> gaussian<span class="br0">&#40;</span><span class="kw2">double</span> u, <span class="kw2">double</span> d<span class="br0">&#41;</span>
+&#160;
+<span class="br0">&#123;</span>
+&#160;
+        static <span class="kw2">double</span> t = <span class="nu0">0.0</span>;
+&#160;
+        <span class="kw2">double</span> x, w1, w2, r;
+&#160;
+        <span class="kw1">if</span><span class="br0">&#40;</span> t == <span class="nu0">0</span> <span class="br0">&#41;</span>
+&#160;
+     <span class="br0">&#123;</span>
+&#160;
+               do<span class="br0">&#123;</span>
+                      w1 = <span class="nu0">2.0</span> * rnd<span class="br0">&#40;</span><span class="br0">&#41;</span> - <span class="nu0">1.0</span>;
+&#160;
+                      w2 = <span class="nu0">2.0</span> * rnd<span class="br0">&#40;</span><span class="br0">&#41;</span> - <span class="nu0">1.0</span>;
+&#160;
+                      r = w1 * w1 + w2 * w2;
+&#160;
+                  <span class="br0">&#125;</span>
+&#160;
+                <span class="kw1">while</span><span class="br0">&#40;</span> r &gt;= <span class="nu0">1.0</span> <span class="br0">&#41;</span>;
+&#160;
+                r = <span class="kw2">sqrt</span><span class="br0">&#40;</span> -<span class="nu0">2.0</span>*<span class="kw2">log</span><span class="br0">&#40;</span>r<span class="br0">&#41;</span> / r <span class="br0">&#41;</span>;
+&#160;
+                t = v2 * r;
+&#160;
+                <span class="kw1">return</span><span class="br0">&#40;</span> u + w1 * r * d <span class="br0">&#41;</span>;
+&#160;
+       <span class="br0">&#125;</span>
+&#160;
+        <span class="kw1">else</span>
+&#160;
+        <span class="br0">&#123;</span>
+&#160;
+                x = t;
+&#160;
+                t = <span class="nu0">0.0</span>;
+&#160;
+                <span class="kw1">return</span><span class="br0">&#40;</span> u + x * d<span class="br0">&#41;</span>;
+&#160;
+        <span class="br0">&#125;</span>
+&#160;
+<span class="br0">&#125;</span></pre></div></div>
+<hr />
+<hr />
+<hr />
+<h2><span class="mw-headline" id="Questions_and_comments"><a href="/rhea/index.php/Joonsoocomment" title="Joonsoocomment">Questions and comments</a></span></h2>
+<p>If you have any questions, comments, etc. please post them on <a href="/rhea/index.php/Joonsoocomment" title="Joonsoocomment">this page</a>.
+</p>
+<hr />
+<p><a href="/rhea/index.php/2014_Spring_ECE_662_Boutin" title="2014 Spring ECE 662 Boutin">Back to ECE662, Spring 2014</a>
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.108 seconds
+Real time usage: 0.114 seconds
+Preprocessor visited node count: 424/1000000
+Preprocessor generated node count: 914/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key prjrhea:pcache:idhash:12571-0!*!0!!en!*!*!math=6 and timestamp 20160606124708 and revision id 68944
+ -->
+</div><div class="printfooter">
+Retrieved from "<a href="https://www.projectrhea.org/rhea/index.php?title=The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution&amp;oldid=68944">https://www.projectrhea.org/rhea/index.php?title=The_principles_for_how_to_generate_random_samples_from_a_Gaussian_distribution&amp;oldid=68944</a>"</div>
+                    <div id="categoryLinks"><div id='catlinks' class='catlinks'><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/rhea/index.php/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="/rhea/index.php/Category:Slecture" title="Category:Slecture">Slecture</a></li><li><a href="/rhea/index.php/Category:ECE662Spring2014Boutin" title="Category:ECE662Spring2014Boutin">ECE662Spring2014Boutin</a></li><li><a href="/rhea/index.php/Category:ECE" title="Category:ECE">ECE</a></li><li><a href="/rhea/index.php/Category:ECE662" title="Category:ECE662">ECE662</a></li><li><a href="/rhea/index.php/Category:Pattern_recognition" title="Category:Pattern recognition">Pattern recognition</a></li></ul></div></div></div>                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col2">
+            <!-- Left Menu -->
+            <div style="width: 249px; height: auto;  text-align: left;" class="sideBox">
+                <div style="height: 1.3em; background-color: #262626; color: white; text-align: center;font-size: 14px;">
+                    Shortcuts
+                </div>
+                <div style='margin-left: 5px; margin-bottom: 3px; padding-top: 5px;'>
+   <a class='linkDiv' href="/rhea/index.php/Help:Contents" style='margin: 3px; font-size: 11px;color: #66e;'>Help</a>
+ <a class='linkDiv' href="/rhea/index.php/Main_Page" style='margin: 3px; font-size: 11px;color: #66e;'>Main Wiki Page</a>
+    <a class='linkDiv' href="https://www.projectrhea.org/rhea/index.php/Special:Random" style='margin: 3px; font-size: 11px;color: #66e;'>Random Page</a>
+    <a class='linkDiv' href="/rhea/index.php/Special:SpecialPages" style='margin: 3px; font-size: 11px;color: #66e;'>Special Pages</a>
+                                            <a class='linkDiv' href="/rhea/index.php?title=Special:UserLogin" style='margin: 2px; font-size: 12px;'>Log in</a>
+                                     </div>			
+            </div>
+            
+            <!-- Google Search 
+            <style type="text/css">
+            @import url(https://www.google.com/cse/api/branding.css);
+            </style> 
+            <div class="cse-branding-right" style="background-color:#FFFFFF;color:#000000; margin: 0px 0px 3px 5px; height: 80px;">
+              -->
+            <div style="width: 249px; height: auto;  text-align: left;" class="sideBox">
+              <div style="height: 1.3em; background-color: #262626; color: white; text-align: center; font-size: 14px;">
+                    Search
+              </div>
+
+              <div style='padding-top: 7px; padding-bottom: 7px;'>
+
+                <form id="searchForm" class="searchForm" name="searchForm" action="/rhea/index.php/Special:Search">
+                        <input id="searchInput" class="searchInput" name="search" type="text" accesskey="f" value="" />
+                        <input id="searchButton" class="searchButton" type='submit' name="fulltext" value="Search" />
+                </form>
+              </div>
+            </div> 
+
+
+	<!--
+	<div style="width: 249px; height: auto;  text-align: left;" class="sideBox">
+              <div style="height: 1.3em; background-color: #262626; color: white; font-size: 14px; text-align: center;">
+                    Share
+              </div>
+	</div>-->
+            
+            <div style="clear: left;"></div>
+            
+            <!-- Liaison boxes -->
+            <div id="slidebox">
+		<a class="close"></a>
+                <h2>Alumni Liaison</h2>
+                <div class='oece_wrap'>
+                <div class='oece_desc'><div class='oece_year'></div><div class='oece_shortdesc'>Have a piece of advice for Purdue students? Share it through Rhea!<div style='margin-top: 5px;'><a class='more' target='_blank' href='https://www.projectrhea.org/liaisons/index.php?title=Invitation_Alumni'>Read more »</a></div></div></div><a target='_blank' href='https://www.projectrhea.org/liaisons/index.php?title=Invitation_Alumni'><img class='oece_img' src='http://www.nursing.purdue.edu/alum_teaser.jpg'/></a><br/><div class='oece_name'>Alumni Liaison</div>                </div>
+            </div>
+
+          
+			<!-- Left end -->
+        </div>
+    </div>
+</div>
+<div id="footer">
+<div id="last">
+    <div class="poweredby noprint clearboth">
+                            <span id="footer-poweredbyico"><a href="//www.mediawiki.org/"><img src="/rhea/skins/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></span>
+                    </div>
+        <div class="noprint">
+            Copyright &copy; 2004-2005
+        </div>
+ 
+
+		
+       <div id="article-info" class="smallprint">
+                             This page was last modified on 22 January 2015, at 10:39.                                        This page has been accessed 3,261 times.            		</div> 
+
+</div>
+</div>
+
+<div id='chat-wrapper' style='display:none'>
+	<div id='popups'>
+		<div id='page-list' style='display:none'>
+			<div id='page-list-title'>Currently Active Pages
+				<div id='close-page-list' title='Close page list' onclick='$("page-list").toggle()'>x</div>
+				<div id='new-page-chat' title='Start new discussion' onclick='startNew();' style='display:none;'>+</div>
+			</div>
+			<div id='pages'></div>
+			<div id='page-options'></div>
+		</div>
+		<div id='chat' style='display:none'>
+			<div id='incoming'></div><div id='close-chat' onclick='$("chat").hide();'>x</div><div id='chat-title'></div><div id='users-on-page'></div>
+			 <input onkeydown='if (event.keyCode == 13) sendText();' id='outgoing' />
+		</div>
+	</div>
+	<div id='chat-bar'>
+        <div id='chat-list'></div>
+        <div id='pages-button' onclick='pageList();' title='View currently active pages'>Chat</div>
+        <div id='disable-chat' onclick='toggleChat();' title='Toggle chat'>x</div>
+   </div>
+</div>
+
+
+<!-- END CUSTOMIZED STUFF -->
+<script>if(window.mw){
+mw.loader.load(["ext.math.mathjax.enabler"],null,true);
+}</script>
+
+<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["ext.math.mathjax.enabler","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+
+
+<script type="text/javascript" src="/rhea/skins/common/prototype.js"></script>
+
+<script type="text/javascript" src="/rhea/skins/rhea/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript" src="/rhea/skins/rhea/share.js"></script>
+
+<!-- slide out box -->
+<script type="text/javascript">
+jQuery.noConflict();
+
+jQuery(function() {
+        jQuery(window).scroll(function(){
+                /* when reaching the element with id "last" we want to show the slidebox. Let's get the distance from the top to the element */
+                var distanceTop = jQuery('#last').offset().top - jQuery(window).height();
+
+                if  (jQuery(window).scrollTop() > distanceTop)
+                        jQuery('#slidebox').animate({'left':'0px'}, 500);
+                else
+                        jQuery('#slidebox').stop(true).animate({'left':'-500px'},100);
+        });
+
+        /* remove the slidebox when clicking the cross */
+        jQuery('#slidebox .close').bind('click',function(){
+                jQuery(this).parent().hide({'left': '0px'});
+        });
+});
+</script>
+
+
+
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":242});
+}</script>
+<!-- GOOGLE ANALYTICS: ADDED BY BBRAME 02/02/09 -->
+<script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+        try {
+                var pageTracker = _gat._getTracker("UA-7305010-1");
+                pageTracker._trackPageview();
+        } catch(err) {}
+</script>
+
+<!-- END GOOGLE ANALYTICS: -->
+  </body>
+</html>

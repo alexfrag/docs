@@ -1,0 +1,26 @@
+function cap_prices=cap_price_blk(cap_volatilities,maturities,strike,notional,zeroCurve,reset)
+rows = length(cap_volatilities); 
+cap_prices = ones(rows,1);
+tau=1/reset;
+cap = zeros(1,rows);
+for i=1:rows
+    tms=0:tau:maturities(i);
+    for j=1:maturities(i)*reset
+        sigma=cap_volatilities(i);
+        DF=DiscFactor(zeroCurve,tms(i+1),'continuous');
+        F=forward_rate(zeroCurve,tms(i),tms(i+1),'continuous');
+        cpl=caplet_price_blk(strike,F,sigma,tms(i),DF,tau)
+        cap(i)=cap(i)+cpl;
+    end
+end
+cap_prices=0;
+end
+
+function cpl_price=caplet_price_blk(K,F,cap_vol,T,DF,tau)
+u= cap_vol*sqrt(T);
+Nd1 = normcdf(((log(F/K)+u^2 /2)/u),0,1);
+Nd2 = normcdf(((log(F/K)-u^2 /2)/u),0,1);
+cpl_price=DF*F*Nd1*tau-K*Nd2*tau;
+end
+
+

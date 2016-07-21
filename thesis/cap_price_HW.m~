@@ -1,0 +1,23 @@
+function price=cap_price_HW(params,maturity,zeroCurve,strike,Notional,reset)
+alpha = params(1);
+sigma = params(2);
+tau=1/reset;
+cap=0
+times=0:tau:maturity;
+X=1/(1+strike*tau);
+for i=1:maturity*reset
+    cap=cap+ZBP(times(i),times(i+1),X,zeroCurve,alpha,sigma)
+end
+end
+
+function ZBP=ZBP(t_prev,t_cur,X,zeroCurve,alpha,sigma)
+B=1/alpha*(1-exp^(alpha*(t_cur-t_prev)));
+sigmaP=sigma*sqrt((1-exp(-2*alpha*(t_prev-0)))/(2*alpha))*B;
+h= (1/sigmaP) * log(feval(zeroCurve,t_cur)/(feval(zeroCurve,t_prev)*X))+sigmaP/2;
+
+d1 =-h+sigmaP;
+d2 =-h; 
+
+ZBP=feval(zeroCurve,t_cur)*normcdf(d1,0,1)-(1+X*(t_cur-t_prev))*feval(zeroCurve,t_prev)*normcdf(d2,0,1);
+
+end

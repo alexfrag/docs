@@ -1,0 +1,9 @@
+function P=DiscFactor(zeroCurve,maturity,compounding)
+ if strcmp(compounding,'continuous')
+       
+ elseif strcmp(compounding,'simple')
+        
+ else
+      display('No such argument exists');
+
+end
