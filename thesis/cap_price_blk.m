@@ -9,7 +9,7 @@ for i=1:rows
         sigma=cap_volatilities(i);
         DF=DiscFactor(zeroCurve,tms(j+1),'continuous');
         F=forward_rate(zeroCurve,tms(j),tms(j+1),'continuous');
-        cpl=DF*tau*caplet_price_blk(strike,F,sigma,tms(j),tau)
+        cpl=DF*tau*caplet_price_blk(strike,F,sigma,tms(j),tau);
         cap(i)=cap(i)+cpl;
     end
 end

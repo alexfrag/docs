@@ -1,14 +1,19 @@
-function price=cap_price_HW(params,maturity,zeroCurve,strike,Notional,reset,compounding)
+function price=cap_price_HW(params,maturities,zeroCurve,strike,Notional,reset,compounding)
 alpha = params(1);
 sigma = params(2);
 tau=1/reset;
-cap=0;
-times=0:tau:maturity;
 X=1/(1+strike*tau);
-for i=2:maturity*reset
-    cap=cap+ZBP(times(i),times(i+1),X,zeroCurve,alpha,sigma,compounding);
+
+for j=1:length(maturities)
+    cap=0;
+    maturity=maturities(j);
+    times=0:tau:maturity;
+    for i=2:maturity*reset
+        cap=cap+ZBP(times(i),times(i+1),X,zeroCurve,alpha,sigma,compounding);
+    end
+    price(j)=Notional*cap;
 end
-price=Notional*cap;
+
 end
 
 function ZBP=ZBP(t_prev,t_cur,X,zeroCurve,alpha,sigma,compounding)
