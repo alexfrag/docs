@@ -37,7 +37,7 @@ RateSpec = intenvset('StartDates', Settle,'EndDates', ZeroDates, ...
 
 
 % Number of Monte Carlo simulations
-numScenarios = 10;
+numScenarios = 1000;
 
 % Compute monthly simulation dates, then quarterly dates later.
 simulationDates = datemnth(Settle,0:12);
@@ -90,7 +90,7 @@ values = hcomputeMTMValues(swaps,simulationDates,scenarios,Tenor);
 
 
 
-i = 2;
+i = 32;
 figure;
 surf(Tenor, simulationDates, scenarios(:,:,i))
 axis tight
@@ -128,3 +128,4 @@ title('Total MTM Portfolio Value for All Scenarios');
 datetick('x','mmmyy')
 ylabel('Portfolio Value ($)')
 xlabel('Simulation Dates')
+
