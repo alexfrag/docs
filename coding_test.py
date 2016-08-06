@@ -31,16 +31,17 @@ class CodingTest:
         #extract the proxy prices and compute daily returns
         spy=self.prices[['date','SPY.P']].set_index('date')
         spy=spy.loc[Dates]
-        self.proxy_returns=np.array(spy.pct_change())
+        self.proxy_returns=np.array(spy.pct_change()).squeeze()
         self.proxy_returns=self.proxy_returns[1:]
         
         #portfolio value at each time step
-        value_long=np.zeros((len(Dates),1))
-        value_short=np.zeros((len(Dates),1))
+        value_long=np.zeros(len(Dates))
+        value_short=np.zeros(len(Dates))
        
         #portfolio return at each time step
-        self.ret_long=np.zeros((len(Dates)-1,1))
-        self.ret_short=np.zeros((len(Dates)-1,1))
+        self.ret_long=np.zeros(len(Dates)-1)
+        self.ret_short=np.zeros(len(Dates)-1)
+        self.total_returns=np.zeros(len(Dates)-1)
         
         #portfolio return at each time step
         profit_long=np.zeros((len(Dates)-1))
@@ -49,7 +50,8 @@ class CodingTest:
         #create a dataframe which will hold our daily positions(contain the stock quatities)
         h=self.prices.columns[1:]
         df=pd.DataFrame(np.zeros((1,len(h))), columns=h)
-        
+        w1=0
+        w2=0
         for indx,date in enumerate(Dates):
             #extract trades for this particular date
             curr_trades=self.trades[self.trades.date==date]
@@ -69,10 +71,11 @@ class CodingTest:
                 # compute the returns for long and short positions seperetly: Price(end)/Price(start) -1
                 self.ret_long[indx-1]=tot_val_long/value_long[indx-1]-1
                 self.ret_short[indx-1]=-(total_val_short/value_short[indx-1]-1)
+                self.total_returns[indx-1]=w1*self.ret_long[indx-1]+w2*self.ret_short[indx-1]
                 
                 # compute the profit for long and short positions seperetly
                 profit_long[indx-1]= tot_val_long-value_long[indx-1]
-                profit_short[indx-1]=-(total_val_short-value_short[indx-1])
+                profit_short[indx-1]=total_val_short-value_short[indx-1]
                 
                
                
@@ -84,26 +87,27 @@ class CodingTest:
             curr_value=np.array(df)*np.array(stock_prices)
             value_long[indx]=np.nansum(curr_value[curr_value>0])
             value_short[indx]=np.nansum(curr_value[curr_value<0])
-            tot=value_long[indx]+value_short[indx]
+            tot=value_long[indx]+abs(value_short[indx])
             w1=value_long[indx]/tot
-            w2=value_short[indx]/tot
+            w2=abs(value_short[indx])/tot
             
         
         fig = plt.figure()
         
-        ax1=fig.add_subplot(211, xlabel='Dates',ylabel='Profit in $ (long)')
-        self.eqCurve_long=pd.Series(profit_long, index=Dates[1:]).cumsum()
-        self.eqCurve_long.plot(ax=ax1)
         
-        ax2=fig.add_subplot(212, xlabel='Dates',ylabel='Profit in $ (short)')
-        self.eqCurve_short=pd.Series(profit_short, index=Dates[1:]).cumsum()
-        self.eqCurve_short.plot(ax=ax2)
+        ax1=fig.add_subplot(111, xlabel='Dates',ylabel='Profit in $',title='Equity curve')
+        self.eqCurve=pd.Series(profit_long+profit_short, index=Dates[1:]).cumsum()
+        self.eqCurve.plot(ax=ax1)
+        
+#        ax1=fig.add_subplot(211, xlabel='Dates',ylabel='Profit in $ (long)',title='Equity curve')
+#        self.eqCurve_long=pd.Series(profit_long, index=Dates[1:]).cumsum()
+#        self.eqCurve_long.plot(ax=ax1)
+        
+#        ax2=fig.add_subplot(212, xlabel='Dates',ylabel='Profit in $ (short)')
+#        self.eqCurve_short=pd.Series(profit_short, index=Dates[1:]).cumsum()
+#        self.eqCurve_short.plot(ax=ax2)
         
         plt.show()
-        # Compute the total Returns
-        # Actually I am NOT sure if this calulation makes sense qualitatively
-        
-        self.total_returns=self.ret_long+self.ret_short
     
     @staticmethod 
     def Drawdown(equity_curve,Dates):
@@ -126,11 +130,10 @@ class CodingTest:
         # Make sure that the user has run the method  equity_curve before this one
         try:
             self.total_returns
-            self.eqCurve_long
-            self.eqCurve_short
+            self.eqCurve
             self.proxy_returns
         except AttributeError:
-            print("A needed instant attribute has not defined. Run equity_curve before. ")
+            print("A mandatory instant attribute for this method has not defined. Run equity_curve first.")
             sys.exit(0)
         
         Dates=self.trades['date'].unique()
@@ -139,28 +142,39 @@ class CodingTest:
         # definition=(E(R)-E(R_proxy))/std(E(R)-E(R_proxy))       
         
         Sharpe_ratio=(np.mean(self.total_returns)-np.mean(self.proxy_returns)) /(np.std(self.total_returns)-np.std(self.proxy_returns))
-
+        print('THE COMPUTED SHARPE RATIO IS: %f \n'%Sharpe_ratio)
+            
         # Hit Ratio
         #Definition:number of periods with positive alphas divided by the total number of periods
         num_periods=len(Dates)-1
         hits_total=np.sum(self.total_returns>self.proxy_returns)
         hit_ratio_total=float(hits_total)/num_periods
+        print('THE COMPUTED HIT RATIO IS: %f \n'%hit_ratio_total)
         
         # Drawdown Curve/Maximum Drawdown for long and short positions separately
-        max_drawdown_long,drawdown_long=self.Drawdown(self.eqCurve_long,Dates)
-        max_drawdown_short,drawdown_short=self.Drawdown(self.eqCurve_short,Dates)
+         
+        max_drawdown,drawdown=self.Drawdown(self.eqCurve,Dates)
+        print('THE COMPUTED MAX DRAWDOWN IS: %f \n'%max_drawdown)
         
+#        max_drawdown_long,drawdown_long=self.Drawdown(self.eqCurve_long,Dates)
+#        max_drawdown_short,drawdown_short=self.Drawdown(self.eqCurve_short,Dates)
+#        
         fig = plt.figure()
+        ax1=fig.add_subplot(111, xlabel='Dates',ylabel='DrawDown',title='DrawDown Curve')
+        self.drawdown=pd.Series(drawdown, index=Dates[1:])
+        self.drawdown.plot(ax=ax1)
         
-        ax1=fig.add_subplot(211, xlabel='Dates',ylabel='DrawDown (long)')
-        self.eqCurve_long=pd.Series(drawdown_long, index=Dates[1:])
-        self.eqCurve_long.plot(ax=ax1)
+#        ax1=fig.add_subplot(211, xlabel='Dates',ylabel='DrawDown',title='DrawDown Curve')
+#        self.eqCurve_long=pd.Series(drawdown_long, index=Dates[1:])
+#        self.eqCurve_long.plot(ax=ax1)
         
-        ax2=fig.add_subplot(212, xlabel='Dates',ylabel='DrawDown (short)')
-        self.eqCurve_short=pd.Series(drawdown_short, index=Dates[1:])
-        self.eqCurve_short.plot(ax=ax2)
+#        ax2=fig.add_subplot(212, xlabel='Dates',ylabel='DrawDown (short)')
+#        self.eqCurve_short=pd.Series(drawdown_short, index=Dates[1:])
+#        self.eqCurve_short.plot(ax=ax2)
         
         plt.show()
+        
+        return Sharpe_ratio,hit_ratio_total,max_drawdown
         
     def alpha_curve(self):
         """
@@ -174,7 +188,7 @@ class CodingTest:
             self.ret_short
             self.proxy_returns
         except AttributeError:
-            print("A needed instant attribute has not defined. Run equity_curve before. ")
+            print("A mandatory instant attribute for this method has not defined. Run equity_curve first.")
             sys.exit(0)
    
         data_long=self.ret_long-self.proxy_returns
@@ -240,7 +254,7 @@ class CodingTest:
        
         # steps 1-4
         for i,stock in enumerate(unique_stocks):
-            print i
+            
             pos=self.trades.ric==stock
             df=self.trades[pos]
             for indx in df.trdIx.unique():
@@ -273,7 +287,8 @@ class CodingTest:
         z=clf.predict(features[1201:,:])
         res=z==labels[1201:]
         
-        return float(np.sum(res))/len(res)
+        print('THE SIGNALS PREDICT EXCESS RETURNS WITH ACCURACY: %f \n'%(float(np.sum(res))/len(res)))
+        
 
     
     def readCSV(self):
@@ -282,7 +297,8 @@ class CodingTest:
         try:
             self.trades=pd.read_csv(self.args.tradesPath)
             self.prices=pd.read_csv(self.args.PricesPath)
-            #df.rename(columns={'$a': 'a', '$b': 'b'})
+            self.prices=self.prices.rename(columns={'Unnamed: 0': 'date'})
+
         except Exception as e:
             print(e)
             sys.exit(0)
@@ -292,18 +308,18 @@ class CodingTest:
         
         self.readCSV()
         self.equity_curve()
-        #self.performance_metrics()
-        #self.alpha_curve()
+        sharpe_ratio, hit_ratio,max_drawdown=self.performance_metrics()
+        self.alpha_curve()
         self.indicator_test()
         
         
 def main():
     
     parser = argparse.ArgumentParser(description='Coding Test')
-    parser.add_argument("--tradesPath", help="Provide the path for the tradeList.csv file")
-    parser.add_argument("--PricesPath", help="Provide the path for the prices.csv file")
+    parser.add_argument("tradesPath", help="Provide the path for the tradeList.csv file")
+    parser.add_argument("PricesPath", help="Provide the path for the prices.csv file")
     
-    parser.add_argument("--debug", dest="debug", default=False, action="store_true", help="enable debugging")
+    #parser.add_argument("--debug", dest="debug", default=False, action="store_true", help="enable debugging")
     args = parser.parse_args()
     
     app=CodingTest()

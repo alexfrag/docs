@@ -4,6 +4,7 @@ Settle = datenum('28-Jul-2016');
 format = 'dd-mmm-yyyy';
 portfolio=readtable('/home/alex/thesis/portfolio.xlsx');
 portfolio=table2cell(portfolio);
+compounding='continuous';
 
 swap_number=length(portfolio(:,1));
 swap_settle=datenum(portfolio(:,1),format); 
@@ -11,11 +12,16 @@ swap_notional=cell2mat(portfolio(:,2));
 swap_counterparty=cell2mat(portfolio(:,3)); 
 swap_maturities=datenum(portfolio(:,4),format); 
 swap_resets=cell2mat(portfolio(:,5));
+swap_type=portfolio(:,6);
 
 % calculate the swap Rates
 for i=1:swap_number
-    swap_rates(i)=swapRates(zeroCurve,swap_resets(i),Settle,swap_settle(i),swap_maturities(i),'continuous');
+    swap_rates(i)=swapRates(zeroCurve,swap_resets(i),swap_settle(i),swap_maturities(i),'continuous');
 end
+
+%confirm that using the previous swap rates value of the contract is zero
+% at t=0
+swap_prices=IRS_Price(zeroCurve,Settle*ones(swap_number,1),swap_maturities,swap_rates,swap_notional,swap_resets,'continuous');
 
 %%
 
@@ -27,7 +33,6 @@ Tenor_days=Tenor*360;
 Tenor_months=Tenor_days/30;
 
 
-reset=4;
 compounding='continuous';
 
 zeroCurve = fit(Tenor',ZeroRates','cubicinterp');
@@ -101,16 +106,17 @@ ZeroDates=Settle+Tenor_days;
 RateSpec = intenvset('StartDates', Settle,'EndDates', ZeroDates, ...
     'Rates', ZeroRates,'Compounding',Compounding,'Basis',Basis);
 
-Alpha = params(1);
-
-Sigma = params(2);
+% Alpha = params(1);
+% Sigma = params(2);
+Alpha = 0.2;
+Sigma = 0.015;
 
 hw1 = HullWhite1F(RateSpec,Alpha,Sigma);
 
 %% Generate yield curve scenarios
 
 prevRNG = rng(0, 'twister');
-sim_maturity=datenum('28-Apr-2020');
+sim_maturity=datenum('28-Oct-2021');
 sim_dates=generate_sim_dates(Settle,sim_maturity);
 dt = diff(yearfrac(Settle,sim_dates,2))';
 nPeriods = numel(dt);
@@ -120,7 +126,7 @@ scenarios = hw1.simTermStructs(nPeriods, 'nTrials',numScenarios, 'deltaTime',dt)
 
 i = 10;
 figure;
-surf(Tenor_months, simulationDates, scenarios(:,:,i))
+surf(Tenor_months, sim_dates, scenarios(:,:,i))
 axis tight
 datetick('y','mmmyy');
 xlabel('Tenor (Months)');
@@ -128,20 +134,109 @@ ylabel('Observation Date');
 zlabel('Rates');
 
 %% MTM prices for IRS
-Notional=100;
-
-mtm(scenarios,Tenor,sim_dates,swap_maturities(i),swaprate,reset,Notional);
 
 for j=1:numScenarios
     for i=1:swap_number
-        IRS_mtm(i,:)=mtm(scenarios(:,:,j),Tenor,sim_dates,swap_settle(i),swap_maturities(i),swap_rates(i),swap_resets(i),swap_notional(i),compounding);
+        prices(i,:)=mtm(scenarios(:,:,j),Tenor,sim_dates,swap_settle(i),swap_maturities(i),swap_rates(i),swap_resets(i),swap_notional(i),compounding,swap_type{i});
     end
+    IRS_mtm(:,:,j)=prices;
 end
 
-plot(sim_dates,IRS_mtm)
+j=5;
+plot(sim_dates,IRS_mtm(:,:,j))
 datetick('keeplimits');
 ylabel('Mark-To-Market Price($)');
 xlabel('Simulation Dates');
+grid on;
+%% MTM prices for the total portfolio
 
-%% MTM prices for the whole portfolio
+figure;
+Total_value = squeeze(sum(IRS_mtm,1));
+plot(sim_dates,Total_value);
+title('Total MTM Portfolio Value for All Scenarios');
+datetick('x','mmmyy');
+ylabel('Portfolio Value ($)');
+xlabel('Simulation Dates');
+
+%% Calculate the exposures with or without Netting
+netting=true;
+for i=1:numScenarios
+    [total_portfolio_exp(i,:) exp_cp(:,:,i)]=compute_exposures(IRS_mtm(:,:,i),swap_counterparty,netting);
+end
+
+
+%Plot the total Portfolio exposure
+
+figure;
+plot(sim_dates,total_portfolio_exp);
+title('Portfolio Exposure for Different Scenarios');
+datetick('x','mmmyy');
+ylabel('Exposure ($)');
+xlabel('Simulation Dates');
+
+%Plot counterpart's exposure
+
+
+%% Calculate the Expected Exposures
+[total_EE EE_cp]=compute_EE(total_portfolio_exp,exp_cp);
+
+figure;
+plot(sim_dates,total_EE);
+title('Portfolio Expected Exposure');
+datetick('x','mmmyy');
+ylabel('Expected Exposure ($)');
+xlabel('Simulation Dates');
+
+figure;
+plot(sim_dates,EE_cp(2,:));
+title('Counter Party Expected Exposure');
+datetick('x','mmmyy');
+ylabel('Expected Exposure ($)');
+xlabel('Simulation Dates');
+
+%% Generate Default Probabilities
+
+cds_info=readtable('/home/alex/thesis/portfolio.xlsx','Sheet','Sheet2');
+cds_info=table2cell(cds_info);
+
+CDS_Dates = datenum(cds_info(:,1),format);
+CDS_Spreads = cell2mat(cds_info(:,2:end));
+[spreads num_counterparties]=size(CDS_Spreads); 
+
+Recoveries=[0.4 0.4];
+
+for i=1:num_counterparties
+    intensities(:,i)=findIntensities(CDS_Spreads(:,i),Settle,CDS_Dates,Recoveries(i),zeroCurve,reset);
+    Prob(:,i)=findDefaultProb(intensities(:,i),Settle,CDS_Dates,CDS_Dates);
+    Prob_cva(:,i)=findDefaultProb(intensities(:,i),Settle,CDS_Dates,sim_dates);
+end
+
+
+figure;
+plot(sim_dates,Prob_cva(:,1),'k-');
+hold on
+plot(sim_dates,Prob_cva(:,2),'b-');
+title('Default probabilities per counterparty');
+datetick('x','mmmyy');
+ylabel('Default probability');
+xlabel('Simulation Dates');
+grid on
+
+%% Combute the discount factors in the simulation dates and
+
+T=yearfrac(Settle,sim_dates,2)';
+df=DiscFactor(zeroCurve,T,compounding)';
+df=df(2:end);
+%% CVA calcultion
+
+for i=1:num_counterparties
+    F=diff(Prob_cva(:,i))';
+    cva(i)=sum(df.*EE_cp(i,2:end).*F);
+end
+%% Spread Sensitivities(Delta, Gamma)
+
+[delta]=delta_gamma_sensitivities(zeroCurve,Settle,CDS_Dates,CDS_Spreads,Recoveries,reset,sim_dates,df,EE_cp);
+
+%% Wrong Way Risk
+
 

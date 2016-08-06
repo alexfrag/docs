@@ -1,22 +1,20 @@
-function IRS_Price(zeroCurve,start,maturities,swaprate,Notional,reset,compounding)
-maturities=maturities-start;
-tau=1/reset;
-start=0;
+function RFS=IRS_Price(zeroCurve,start,maturities,swaprates,Notionals,resets,compounding)
+tau=1./resets;
 for i=1:length(maturities)
-    whole_dates=floor(yearfrac(start,maturities(i),2)/tau);
+    whole_dates=floor(yearfrac(start(i),maturities(i),1)/tau(i));
     sum=0;
     ts=1:whole_dates;
-    ts=ts*tau;
+    ts=ts*tau(i);
     for j=1:length(ts)
-        sum=sum+tau*swaprate*DiscFactor(zeroCurve,ts(j),compounding);
+        sum=sum+tau(i)*swaprates(i)*DiscFactor(zeroCurve,ts(j),compounding);
     end
-    res_tau=yearfrac(start(i),maturities(i),2)-whole_dates*tau
-    sum=sum+res_tau*swaprate*DiscFactor(zeroCurve,yearfrac(start,maturities(i),2),compounding);
+    res_tau=yearfrac(start(i),maturities(i),1)-whole_dates*tau(i);
+    sum=sum+res_tau*swaprates(i)*DiscFactor(zeroCurve,yearfrac(start(i),maturities(i),1),compounding);
     
     
-    RFS(i)=Notional*(-DiscFactor(zeroCurve,start,compounding)+DiscFactor(zeroCurve,yearfrac(start,maturities(i),2),compounding)+sum);
+    RFS(i)=Notionals(i)*(-DiscFactor(zeroCurve,0,compounding)+DiscFactor(zeroCurve,yearfrac(start(i),maturities(i),1),compounding)+sum);
 end
-
+    
 end
 
 
